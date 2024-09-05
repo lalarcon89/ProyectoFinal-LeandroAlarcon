@@ -105,3 +105,14 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+/* Estilos del gráfico */
+#graficoTasas {
+    width: 100%;
+    max-width: 1000px;
+    height: 400px; /* Ajusta la altura según sea necesario */
+    margin: 2rem 0; /* Espacio arriba y abajo del gráfico */
+    border-radius: 8px; /* Opcional: para bordes redondeados en el contenedor */
+    background: #fff; /* Opcional: color de fondo para el contenedor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opcional: sombra para destacar el gráfico */
+}
