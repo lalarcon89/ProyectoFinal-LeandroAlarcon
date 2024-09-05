@@ -48,7 +48,7 @@ class Prestamo {
     }
 }
 
-// Validar entradas del usuario
+// Funciones auxiliares
 function validarEntrada(valor, mensaje) {
     if (isNaN(valor) || valor <= 0) {
         alert(mensaje);
@@ -101,6 +101,7 @@ function mostrarResultados(prestamo) {
         </table>
     `;
     guardarResultados(prestamo);
+    cargarTasasInteres();
 }
 
 // Guardar resultados en localStorage
@@ -119,8 +120,48 @@ function cargarResultados() {
 // Limpiar resultados en el DOM y localStorage
 document.getElementById('limpiarResultados').addEventListener('click', function() {
     localStorage.removeItem('prestamoGuardado');
-    document.getElementById('resultados').innerHTML = ''; // Limpiar el DOM
+    document.getElementById('resultados').innerHTML = '';
 });
+
+// Cargar datos desde un archivo JSON local
+async function cargarTasasInteres() {
+    try {
+        const respuesta = await fetch('./data/tasas.json');
+        const datos = await respuesta.json();
+        mostrarGraficoTasas(datos);
+    } catch (error) {
+        console.error('Error al cargar tasas de interés:', error);
+    }
+}
+
+// Mostrar gráfico con Chart.js
+function mostrarGraficoTasas(datos) {
+    const ctx = document.getElementById('graficoTasas').getContext('2d');
+    const tasas = datos.map(dato => dato.tasa);
+    const años = datos.map(dato => dato.año);
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: años,
+            datasets: [{
+                label: 'Tasa de Interés Anual (%)',
+                data: tasas,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
 
 // Ejecutar el simulador cuando se envíe el formulario
 document.getElementById('simuladorForm').addEventListener('submit', function(event) {
@@ -138,9 +179,7 @@ document.getElementById('simuladorForm').addEventListener('submit', function(eve
     const prestamo = new Prestamo(capital, tasaInteresAnual, años);
     prestamo.calcularCuotaMensual();
     prestamo.generarDetalleAmortizacion();
-
     mostrarResultados(prestamo);
 });
 
-// Cargar resultados al iniciar la página
-window.onload = cargarResultados;
+cargarResultados(); // Cargar resultados si existen guardados

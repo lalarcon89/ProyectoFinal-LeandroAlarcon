@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulador de Créditos</title>
     <link rel="stylesheet" href="./css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Librería Chart.js -->
 </head>
 <body>
     <header>
@@ -29,9 +30,10 @@
         <div id="resultados">
             <!-- Los resultados se mostrarán aquí -->
         </div>
-        <br><br><br>
+        <br><br>
         <button id="limpiarResultados">Limpiar Resultados</button>
         <br><br>
+        <canvas id="graficoTasas" width="400" height="200"></canvas> <!-- Gráfico para mostrar datos -->
     </main>
     <footer>
         <p>&copy; 2024 Simulador de Créditos</p>
