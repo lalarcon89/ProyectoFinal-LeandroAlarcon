@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Créditos</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Simulador de Créditos</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <form id="simuladorForm">
+                <label for="capital">Capital prestado:</label>
+                <input type="number" id="capital" min="1" required>
+
+                <label for="tasa">Tasa de interés anual (%):</label>
+                <input type="number" id="tasa" step="0.01" min="0.01" required>
+
+                <label for="años">Duración del préstamo (años):</label>
+                <input type="number" id="años" min="1" required>
+
+                <button type="submit">Calcular</button>
+            </form>
+        </div>
+
+        <div id="resultados">
+            <!-- Los resultados se mostrarán aquí -->
+        </div>
+        <br><br><br>
+        <button id="limpiarResultados">Limpiar Resultados</button>
+        <br><br>
+    </main>
+    <footer>
+        <p>&copy; 2024 Simulador de Créditos</p>
+    </footer>
+    <script src="./scripts/main.js"></script>
+</body>
+</html>
